@@ -6,7 +6,7 @@ int count;
 struct word_t *next;
 }
 
-main (int argc, char *argv[])
+int main (int argc, char *argv[])
 {
   int count;
 
@@ -23,4 +23,6 @@ main (int argc, char *argv[])
     {
       printf("The command had no other arguments.\n");
     }
+
+  return 0;
 }
