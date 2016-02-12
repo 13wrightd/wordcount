@@ -13,18 +13,6 @@ int main(int argc, char *argv[]) {
 	FILE *fp;
 	fp = fopen(argv[1], "r");
 
-
-
-
-	// if (fp) {
- //    while (fscanf(fp, "%s", str)!=EOF){
-
-
-
- //        printf("%s ",str);
- //    }
- //    fclose(fp);
-	// }	
 	char *str;
 	char c;
 	int numChar = 0;
@@ -35,16 +23,14 @@ int main(int argc, char *argv[]) {
 	if (fp) {
 		while ((c=fgetc(fp))!=EOF){
 			if((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57)){
-				str[numChar] = c;
+				str[numChar] = tolower(c);
 				numChar++;
 				str = (char *)realloc(str, numChar*sizeof(char));
 				badCharacter=false;
-				//printf("%c", c);
 			}
 			
 			else if((c == 32 || c == 10) && !badCharacter){
 				badCharacter=true;
-				//str = (char *)realloc(str, (numChar)*sizeof(char));
 				str[numChar]='\0';
 				printf("%s ", str);
 				numChar = 0;
