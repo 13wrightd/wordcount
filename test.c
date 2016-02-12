@@ -44,8 +44,8 @@ int main(int argc, char *argv[]) {
 			
 			else if((c == 32 || c == 10) && !badCharacter){
 				badCharacter=true;
-				str = (char *)realloc(str, (numChar)*sizeof(char));
-
+				//str = (char *)realloc(str, (numChar)*sizeof(char));
+				str[numChar]='\0';
 				printf("%s ", str);
 				numChar = 0;
 				free(str);
