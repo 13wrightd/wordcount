@@ -17,12 +17,10 @@ int main(int argc, char *argv[]) {
     char c;
     int numChar = 0;
     struct word_t *head;
-    //struct word_t *tail;
     struct word_t *curr;
     bool found = false;
 
     head = (struct word_t *)malloc(sizeof(struct word_t));
-    //tail = head;
     curr = head;
 
     str = (char *)malloc(sizeof(char));
@@ -41,51 +39,62 @@ int main(int argc, char *argv[]) {
                 badCharacter=true;
                 str[numChar]='\0';
                 numChar = 0;
-
+                
                 while(!found){
-                    if(strcmp(str, curr->word) == 0){
-                            curr->count++;
-                            found = true;
+
+                	if(curr->word == NULL){
+                		curr->word = str;
+                		curr->count++;
+                		found = true;
+                	}
+                	
+            		else if(strcmp(str, curr->word) < 0){
+                        struct word_t *newNode;
+                        newNode = (struct word_t *)malloc(sizeof(struct word_t));
+                        newNode->word = curr->word;
+                        newNode->count = curr->count;
+
+                        curr->word = str;
+                        curr->count = 1;
+
+                        newNode->next = curr->next;
+                        curr->next = newNode;
+
+                        found = true;
                     }
+
+                    
                     else if(strcmp(str, curr->word) > 0){
-                            if(curr->next == NULL){
-                                    curr->next = (struct word_t *)malloc(sizeof(struct word_t));
-                                    strcpy(curr->next->word, str);
-                                    curr->next->count++;
-                                    found = true;
-                            }
-                            else{
-                                    curr = curr->next;
-                            }
-
+                        if(curr->next == NULL){
+                                curr->next = (struct word_t *)malloc(sizeof(struct word_t));
+                                curr->next->word = str;
+                                curr->next->count++;
+                                found = true;
+                        }
+                        else{
+                                curr = curr->next;
+                        }
                     }
+                	
                     else{
-                            struct word_t *newNode;
-                            newNode = (struct word_t *)malloc(sizeof(struct word_t));
-                            strcpy(newNode->word, str);
-                            newNode->count++;
-                            newNode->next = curr->next;
-                            curr->next = newNode;
-                            found = true;
+                        curr->count++;
+                        found = true;
                     }
+               	}
 
-                }
-                    curr = head;
-                    found = false;
-
-            }
-
-            free(str);
-            str = (char *)malloc(sizeof(char));
+               	found = false;
+               	curr = head;
+            	str = (char *)malloc(sizeof(char));
+        	}
         }
     }
+    fclose(fp);
+    
     while(curr->next != NULL){
-            printf("%s, %d", curr->word, curr->count);
+            printf("%s, %d\n", curr->word, curr->count);
             curr = curr->next;
     }
+    
     return 0;
 			
 }
-
-	// for (i = 0; i < argc; i++)
-	// 	printf("\n%s", argv[i]);
