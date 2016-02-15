@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 struct word_t {
 	char *word;
@@ -10,6 +11,11 @@ struct word_t {
 };
 
 int main(int argc, char *argv[]) {
+	clock_t begin, end;
+	double totTime;
+
+	begin = clock();
+
     int i = 0;
     FILE *fp;
     fp = fopen(argv[1], "r");
@@ -90,11 +96,24 @@ int main(int argc, char *argv[]) {
     }
     fclose(fp);
     
+    FILE *fp2;
+    fp2 = fopen(argv[2], "w");
+
+
     while(curr->next != NULL){
-            printf("%s, %d\n", curr->word, curr->count);
+            fprintf(fp2, "%s, %d\n", curr->word, curr->count);
             curr = curr->next;
     }
+    fclose(fp2);
+
+    end = clock();
+    totTime = (double)(end - begin)/CLOCKS_PER_SEC;
+
+    FILE *fp3;
+    fp3 = fopen(argv[3], "a");
     
+    fprintf(fp3, "Total Time: %f\n", totTime);
+    fclose(fp3);
     return 0;
 			
 }
