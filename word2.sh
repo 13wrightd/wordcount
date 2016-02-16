@@ -6,9 +6,9 @@ cat $1 | sed 's/[^a-zA-Z0-9 _-]//g' |
 tr '[:upper:]' '[:lower:]' |
 sed 's/ /\n/g' |
 sed '/^\s*$/d' |
-sort |  uniq -c | awk '{print $2", "$1}' > out2
+sort |  uniq -c | awk '{print $2", "$1}' > out
 echo "---------------"
-cat out2
+cat out
 #cp $1 output
 #cat $1 | tr -cs "[:alpha:]" "\n"
 
