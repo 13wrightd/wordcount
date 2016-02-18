@@ -100,28 +100,32 @@ int main(int argc, char *argv[]) {
 	        	}
 	        }
 
-	    }
-	    fclose(fp);	//close the file
+	        fclose(fp);	//close the file
 	    
-	    FILE *fp2;	//file for data output
-	    fp2 = fopen(argv[2], "w");	//open file in writing mode
+		    FILE *fp2;	//file for data output
+		    fp2 = fopen(argv[2], "w");	//open file in writing mode
 
 
-	   	while(curr != NULL){	//go through the entire list
-	   		if(curr->word[0]!='\0')
-        		fprintf(fp2, "%s, %d\n", curr->word, curr->count);	//print the data to the file
-	     	curr = curr->next;	//increment the iterator
+		   	while(curr != NULL){	//go through the entire list
+		   		if(curr->word[0]!='\0')
+	        		fprintf(fp2, "%s, %d\n", curr->word, curr->count);	//print the data to the file
+		     	curr = curr->next;	//increment the iterator
+		    }
+		    fclose(fp2);	//close the file
+
+		    end = clock();	//stop the execution timer 
+		    totTime = (double)(end - begin)/CLOCKS_PER_SEC;	//calculate the run time
+
+		    FILE *fp3;	//file for execution time output
+		    fp3 = fopen(argv[3], "w");	//open in append
+		    
+		    fprintf(fp3, "Runtime: %f\n", totTime);	//print time to the file
+		    fclose(fp3);	//close the file
 	    }
-	    fclose(fp2);	//close the file
+	    else
+	    	printf("The file could not be opened.\n");
 
-	    end = clock();	//stop the execution timer 
-	    totTime = (double)(end - begin)/CLOCKS_PER_SEC;	//calculate the run time
-
-	    FILE *fp3;	//file for execution time output
-	    fp3 = fopen(argv[3], "a");	//open in append
 	    
-	    fprintf(fp3, "Runtime: %f\n", totTime);	//print time to the file
-	    fclose(fp3);	//close the file
 	}
 	return 0;
 }
