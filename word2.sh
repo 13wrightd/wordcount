@@ -2,7 +2,7 @@
 echo "reading file: $1"
 #read filename
 # cat grep awk sort sed cut
-cat "$1" | sed 's/[^a-zA-Z0-9 _-]//g' |
+cat "$1" | LC_CTYPE=C sed 's/[^0-9A-Za-z ]//g' |
 tr '[:upper:]' '[:lower:]' |
 sed 's/ /\n/g' |
 sed '/^\s*$/d' |
