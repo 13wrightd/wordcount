@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -108,10 +109,10 @@ int main(int argc, char *argv[]) {
 	    fp2 = fopen(argv[2], "w");
 
 
-	   // while(curr->next != NULL){
-	            //fprintf(fp2, "%s, %d\n", curr->word, curr->count);
-	     //       curr = curr->next;
-	    //}
+	   	while(curr->next != NULL){
+        	fprintf(fp2, "%s, %d\n", curr->word, curr->count);
+	     	 curr = curr->next;
+	    }
 	    fclose(fp2);
 
 	    end = clock();

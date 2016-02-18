@@ -29,13 +29,13 @@ int main(int argc, char *argv[]) {
 	    int numChar = 0;			//Number of characters in a string
 	    struct word_t *head;		//Linked link
 	    struct word_t *curr;		//iterator
-	    bool found = false;			//for searching linked list
+	    bool found = false;				//for searching linked list
 
 	    head = (struct word_t *)malloc(sizeof(struct word_t));	//allocate space for the head
 	    curr = head;											//start at the begining of the list
 
 	    str = (char *)malloc(sizeof(char));						
-	    bool badCharacter=false;								//for handling double \n
+	    bool badCharacter=0;									//for handling double \n
 
 	    if (fp) {												//check if the file is open
 	        while ((c=fgetc(fp))!=EOF){							//go through to the end of the file
@@ -47,8 +47,8 @@ int main(int argc, char *argv[]) {
 	            }
 
 	            else if((c == 32 || c == 10) && !badCharacter){								//if it is a space or \n 
-
-	                badCharacter=true;														//handle for case of second \n
+	            	
+	                badCharacter=true;				   										//handle for case of second \n
 	                str[numChar]='\0';														//add null character to end the string
 	                numChar = 0;															//start count for new word
 	                
@@ -88,21 +88,22 @@ int main(int argc, char *argv[]) {
 	                        }
 	                    }
 
-                    }
+                    
 	                	
 	                    else{										//if str == curr->word
 	                        curr->count++;
 	                        found = true;
 	                    }
-	               	}
-	               	found = false;									//reset found
-	               	curr = head;									//reset iterator
-	            	str = (char *)malloc(sizeof(char));				//reset str
+	                }
+	            }
+	            found = false;									//reset found
+	            curr = head;									//reset iterator
+	         	str = (char *)malloc(sizeof(char));				//reset str
 	            	
-	        	}
 	        }
-
 	    }
+
+	
 	    fclose(fp);					//close the input file
 	    
 	    FILE *fp2;					//for output of words to file
@@ -123,6 +124,7 @@ int main(int argc, char *argv[]) {
 	    
 	    fprintf(fp3, "Total Time: %f\n", totTime);					//print the runtime to the file
 	    fclose(fp3);												//close the file
+	
 	}
 	return 0;
 }
