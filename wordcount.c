@@ -1,3 +1,6 @@
+// Daniel Wright	diw5233@psu.edu
+// Evan Gutman		elg5195@psu.edu
+
 
 #include <stdio.h>
 #include <stdlib.h>

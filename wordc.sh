@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Daniel Wright	diw5233@psu.edu
+# Evan Gutman	elg5195@psu.edu
+
 #checks number of arguments
 if [ $# -eq 0 ]; then
     echo "0 arguments provided. 3 required."
